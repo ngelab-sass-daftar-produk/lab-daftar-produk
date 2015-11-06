@@ -4,3 +4,67 @@
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
 
 @import "compass/reset";
+$header-font-family: Sans-serif;
+$base-font-size: 18;
+$base-font-family: serif;
+
+@function header-font-size($increment) {
+    @return ($base-font-size+$increment)*2;
+}
+
+body{
+    font: ($base-font-size)+px $base-font-family;
+}
+.clear{
+    clear: both;
+}
+.container {
+    .left, .right, .produk, .promo, .review{
+        width: 100%;
+    }
+    .produk, #promo, #review {
+        /*border: 1px solid #444;*/
+        background-color: #eee;
+    }
+    #header{
+        h1{
+            font: header-font-size(0)+px $header-font-family;
+        }
+    }
+}
+
+@media (min-width: 480px){
+    .container{
+        .produk {
+            display: inline-block;
+            width: 49%;
+        }
+        #header {
+            h1{
+                font-size: header-font-size(2)+px;
+            }
+        }
+    }
+    body{
+        font-size: ($base-font-size+2)+px;
+    }
+}
+
+@media (min-width: 640px) {
+    .container{
+        #main{
+            .left{
+                display: inline-block;
+                width: 480px;
+                .produk{
+                    display: inline-block;
+                    width: 49%;
+                }
+            }
+            .right{
+                display: inline-block;
+                width: (640-480)+px;
+            }
+        }
+    }
+}
