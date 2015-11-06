@@ -55,7 +55,7 @@ body{
         #main{
             .left{
                 display: inline-block;
-                width: 480px;
+                width: 74%;
                 .produk{
                     display: inline-block;
                     width: 49%;
@@ -63,8 +63,27 @@ body{
             }
             .right{
                 display: inline-block;
-                width: (640-480)+px;
+                width: 24%;
             }
+        }
+    }
+}
+
+@media (min-width: 720px){
+    .container{
+        #main{
+            .left{
+                display: inline-block;
+                width: 75%;
+                .produk{
+                    display: inline-block;
+                    width: (100%/3.1);
+                }
+            }
+        }
+        .right{
+            display: inline-block;
+            width: 25%;
         }
     }
 }
