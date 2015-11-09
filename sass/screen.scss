@@ -149,3 +149,9 @@ body{
 @media (min-width:980px ){
    @include mq-mixin(75%, 24%, (100%/4.1), 5px); 
 }
+
+@for $i from 1 through 3 {
+    .wrapper-promo:nth-child(#{$i}) {
+        border-bottom: 2px solid lighten(#ddd, $i*2);
+    }
+}
