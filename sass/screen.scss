@@ -5,13 +5,42 @@
 
 @import "compass/reset";
 $header-font-family: Sans-serif;
-$base-font-size: 18;
+$base-font-size: 14;
 $base-font-family: Sans-serif;
 
 @function header-font-size($increment) {
-    @return ($base-font-size+$increment)*2;
+    @return ($base-font-size+ $increment)*2;
 }
 
+@function ubah-font-size($increment){
+    @return ($base-font-size+ $increment);
+}
+
+@mixin ib-persen($lebar) {
+    display: inline-block;
+    width: $lebar;
+}
+
+@mixin mq-mixin($lebar-kiri, $lebar-kanan, $lebar-produk, $inc_font){
+    .container{
+        #main{
+            .left{
+                @include ib-persen($lebar-kiri);
+                .produk{
+                    @include ib-persen($lebar-produk);
+                }
+             }
+         }
+         .right{
+             @include ib-persen($lebar-kanan);
+             .wrapper-promo{
+                .harga{
+                    font-size:ubah-font-size($inc_font);
+                }
+             }
+         }
+     }
+}
 body{
     font: ($base-font-size)+px $base-font-family;
 }
@@ -20,6 +49,7 @@ body{
     clear: both;
 }
 .container {
+    margin: 1em auto;
     .left, .right, .produk, .promo, .review{
         width: 100%;
         vertical-align: top;
@@ -32,15 +62,21 @@ body{
     #header{
         h1{
             font: header-font-size(0)+px $header-font-family;
+            line-height: 1em;
+            background-color: #ddd;
+            padding:0.5em 0 0.5em  0; 
         }
     }
 
     .produk {
-        font-size: ($base-font-size - 2px);
+        .wrapper-produk{
+            margin: 1em;
+        }
+        font-size: ubah-font-size(-2px);
         text-align: center;
         .gambar-produk{
-            margin: 1em auto;
             display: block;
+            width: 100%;
         }
         .label-produk, .harga-produk{
             display: block;
@@ -52,13 +88,44 @@ body{
             color: #00c;
         }
     }
+    
+    .column.right{
+        h2{
+            background-color: yellow;
+            padding: 0.5em 1px 0 0;
+        }
+    }
+
+    #promo {
+        .wrapper-promo{
+            margin: 1em;
+            margin-bottom: 2em;
+            .gambar-promo, .harga{
+                @include ib-persen(49%);
+            }
+            .harga{
+                vertical-align: top;
+            }
+        }
+    }
+
+    #review{
+        .review-wrapper{
+            margin: 1em;
+            margin-bottom: 2em;
+            font-size: ubah-font-size(-2px);
+            .reviewer-info{
+                text-align: right;
+            }
+            border-bottom: 1px solid #444;
+        }
+    }
 }
 
 @media (min-width: 480px){
     .container{
         .produk {
-            display: inline-block;
-            width: 49%;
+            @include ib-persen(49%);
         }
         #header {
             h1{
@@ -67,44 +134,18 @@ body{
         }
     }
     body{
-        font-size: ($base-font-size+2)+px;
+        font-size: ubah-font-size(2px);
     }
 }
 
 @media (min-width: 640px) {
-    .container{
-        #main{
-            .left{
-                display: inline-block;
-                width: 74%;
-                .produk{
-                    display: inline-block;
-                    width: 49%;
-                }
-            }
-            .right{
-                display: inline-block;
-                width: 24%;
-            }
-        }
-    }
+    @include mq-mixin(74%, 24%, 49%,3px);
 }
 
 @media (min-width: 720px){
-    .container{
-        #main{
-            .left{
-                display: inline-block;
-                width: 75%;
-                .produk{
-                    display: inline-block;
-                    width: (100%/3.1);
-                }
-            }
-        }
-        .right{
-            display: inline-block;
-            width: 25%;
-        }
-    }
+    @include mq-mixin(75%, 24%, (100%/3.1), 0px);
+}
+
+@media (min-width:980px ){
+   @include mq-mixin(75%, 24%, (100%/4.1), 5px); 
 }
