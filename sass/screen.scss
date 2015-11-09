@@ -6,7 +6,7 @@
 @import "compass/reset";
 $header-font-family: Sans-serif;
 $base-font-size: 18;
-$base-font-family: serif;
+$base-font-family: Sans-serif;
 
 @function header-font-size($increment) {
     @return ($base-font-size+$increment)*2;
@@ -15,20 +15,41 @@ $base-font-family: serif;
 body{
     font: ($base-font-size)+px $base-font-family;
 }
+
 .clear{
     clear: both;
 }
 .container {
     .left, .right, .produk, .promo, .review{
         width: 100%;
+        vertical-align: top;
     }
     .produk, #promo, #review {
         /*border: 1px solid #444;*/
-        background-color: #eee;
+        /*background-color: #eee;*/
+        vertical-align: top;
     }
     #header{
         h1{
             font: header-font-size(0)+px $header-font-family;
+        }
+    }
+
+    .produk {
+        font-size: ($base-font-size - 2px);
+        text-align: center;
+        .gambar-produk{
+            margin: 1em auto;
+            display: block;
+        }
+        .label-produk, .harga-produk{
+            display: block;
+        }
+        .label-produk {
+            font-weight: bold;
+        }
+        .harga-produk {
+            color: #00c;
         }
     }
 }
